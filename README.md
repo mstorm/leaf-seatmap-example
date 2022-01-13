@@ -1,0 +1,2 @@
+# leaflet-seatmap-example
+

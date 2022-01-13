@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Seatmap example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" 
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        #map {
+            width: 100vw;
+            height: 100%;
+        }
+        .leaflet-tooltip-pane .text {
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    var bounds = [[-20, -20], [320, 380]];
+    var map = L.map('map', {
+        crs: L.CRS.Simple,
+        maxZoom: 0,
+        minZoom: -4,
+        maxBounds: bounds
+    });
+
+    var seat = [
+        {
+            "bounds": [[240, 0], [300, 120]],
+            "name": "스티븐 Stephen",
+            "team": "서비스개발팀"
+        },
+        {
+            "bounds": [[0, 0], [60, 120]],
+            "name": "브루스 Bruce",
+            "team": "서비스개발팀"
+        },
+        {
+            "bounds": [[0, 120], [60, 240]],
+            "name": "펠릭스 Felix",
+            "team": "코어개발팀"
+        },
+        {
+            "bounds": [[0, 240], [60, 360]],
+            "name": "루디 Rudy",
+            "team": "코어개발팀"
+        },
+        {
+            "bounds": [[60, 0], [120, 120]],
+            "name": "콜키 Colki",
+            "team": "프론트엔드개발팀"
+        },
+        {
+            "bounds": [[60, 120], [120, 240]],
+            "name": "댄 Dan",
+            "team": "프론트엔드개발팀"
+        },
+        {
+            "bounds": [[60, 240], [120, 360]],
+            "name": "한나 Hannah",
+            "team": "프론트엔드개발팀"
+        }
+    ];
+
+    for (i = 0; i < seat.length; ++i) {
+        var o = seat[i];
+        L.rectangle(o.bounds, {color: 'green', weight: 1}).addTo(map)
+        .bindTooltip(o.name, {permanent: true, direction: 'center', className: 'text'})
+        .openTooltip().bindPopup(o.team);
+    }
+
+    map.fitBounds(bounds);
+</script>
+</body>
+</html>
